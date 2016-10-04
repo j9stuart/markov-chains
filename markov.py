@@ -39,7 +39,6 @@ def make_chains(text_string):
     
 
     for number in range(len(word_pairs) - 1):
-        # chains[word_pairs[number]] = [word_pairs[number + 1][1]]
         if word_pairs[number] not in chains:
             chains[word_pairs[number]] = [word_pairs[number + 1][1]]
         elif word_pairs[number] in chains:
@@ -47,13 +46,16 @@ def make_chains(text_string):
 
     return chains
 
-    
-
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
-    text = ""
+    text = "Would you"
+    text = (text.split())
+    print text 
+
+    for word_pair in chains:
+
 
     # your code goes here
 
@@ -68,7 +70,7 @@ input_text = open_and_read_file(input_path)
 # Get a Markov chain
 chains = make_chains(input_text)
 
-# # Produce random text
-# random_text = make_text(chains)
+# Produce random text
+random_text = make_text(chains)
 
-# print random_text
+print random_text
