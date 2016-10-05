@@ -51,21 +51,22 @@ def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
      
-    text = "Would you"
-    text_split = tuple(text.split())
+    start_text = choice(chains.keys())
+    master_text = start_text[0] + " " + start_text[1]
+    text_split = tuple(master_text.split())
 
     while text_split[-2:] in chains:
         new_word = choice(chains[text_split[-2:]])
-        text += (" "+ new_word)
-        text_split = tuple(text.split())
+        master_text += (" "+ new_word)
+        text_split = tuple(master_text.split())
 
 
     # your code goes here
 
-    return text
+    return master_text
 
 
-input_path = "green-eggs.txt"
+input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
