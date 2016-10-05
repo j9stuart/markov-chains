@@ -50,11 +50,14 @@ def make_chains(text_string):
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
+     
     text = "Would you"
-    text = (text.split())
-    print text 
+    text_split = tuple(text.split())
 
-    for word_pair in chains:
+    while text_split[-2:] in chains:
+        new_word = choice(chains[text_split[-2:]])
+        text += (" "+ new_word)
+        text_split = tuple(text.split())
 
 
     # your code goes here
