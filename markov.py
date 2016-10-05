@@ -1,7 +1,10 @@
+import sys
 from random import choice
 
+filename = sys.argv[1]
 
-def open_and_read_file(file_path):
+
+def open_and_read_file(filename):
     """Takes file path as string; returns text as string.
 
     Takes a string that is a file path, opens the file, and turns
@@ -9,7 +12,8 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
-    file_string = open(file_path).read()
+
+    file_string = open(filename).read()
 
     return file_string
 
@@ -66,10 +70,10 @@ def make_text(chains):
     return master_text
 
 
-input_path = "gettysburg.txt"
+# input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
-input_text = open_and_read_file(input_path)
+input_text = open_and_read_file(filename)
 
 # Get a Markov chain
 chains = make_chains(input_text)
