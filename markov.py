@@ -1,7 +1,7 @@
 import sys
 from random import choice
 
-filename = sys.argv[1]
+filename = sys.argv[1]  # Allows user to specify file name from command line
 
 
 def open_and_read_file(filename):
@@ -10,8 +10,6 @@ def open_and_read_file(filename):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-
-    # your code goes here
 
     file_string = open(filename).read()
 
@@ -34,13 +32,11 @@ def make_chains(text_string):
     chains = {}
     word_pairs = []
 
-    # your code goes here
     words = text_string.split()
 
+    # Generate n-gram of two words to add to word_pairs for dictionary keys
     for number in range(len(words) - 1):
         word_pairs.append((words[number], words[number + 1]))
-
-    
 
     for number in range(len(word_pairs) - 1):
         if word_pairs[number] not in chains:
@@ -53,7 +49,6 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
-
      
     start_text = choice(chains.keys())
     master_text = start_text[0] + " " + start_text[1]
@@ -64,13 +59,7 @@ def make_text(chains):
         master_text += (" "+ new_word)
         text_split = tuple(master_text.split())
 
-
-    # your code goes here
-
     return master_text
-
-
-# input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(filename)
