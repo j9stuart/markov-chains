@@ -1,8 +1,9 @@
 import sys
 from random import choice
+from random import randint
 
 filename = sys.argv[1]  # Allows user to specify file name from command line
-
+n = 3
 
 def open_and_read_file(filename):
     """Takes file path as string; returns text as string.
@@ -31,18 +32,22 @@ def make_chains(text_string):
 
     chains = {}
     word_pairs = []
+    n_gram = ()
+ 
 
     words = text_string.split()
 
-    # Generate n-gram of two words to add to word_pairs for dictionary keys
-    for number in range(len(words) - 1):
-        word_pairs.append((words[number], words[number + 1]))
+    # # Generate n-gram of two words to add to word_pairs for dictionary keys
+
+    for number in range(len(words) - 2):
+        word_pairs.append(tuple(words[number: number + n]))
+    
 
     for number in range(len(word_pairs) - 1):
         if word_pairs[number] not in chains:
-            chains[word_pairs[number]] = [word_pairs[number + 1][1]]
+            chains[word_pairs[number]] = [word_pairs[number + 1][n - 1]]
         elif word_pairs[number] in chains:
-           chains[word_pairs[number]] += [word_pairs[number + 1][1]]
+           chains[word_pairs[number]] += [word_pairs[number + 1][n - 1]]
 
     return chains
 
@@ -51,11 +56,11 @@ def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
      
     start_text = choice(chains.keys())
-    master_text = start_text[0] + " " + start_text[1]
+    master_text = start_text[0] + " " + start_text[1] + " " + start_text[2]
     text_split = tuple(master_text.split())
 
-    while text_split[-2:] in chains:
-        new_word = choice(chains[text_split[-2:]])
+    while text_split[-n:] in chains:
+        new_word = choice(chains[text_split[-n:]])
         master_text += (" "+ new_word)
         text_split = tuple(master_text.split())
 
@@ -67,7 +72,7 @@ input_text = open_and_read_file(filename)
 # Get a Markov chain
 chains = make_chains(input_text)
 
-# Produce random text
+# # Produce random text
 random_text = make_text(chains)
 
 print random_text
